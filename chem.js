@@ -17,6 +17,7 @@ var Chem = {
         // Create a "covalent bond" between two atoms
         var bond_atoms = function(atom_0, atom_1) {
 
+            // TODO: Do stuff
         }
 
         // Using compound structural data, generate the physical object
@@ -25,11 +26,11 @@ var Chem = {
             console.log(compound);
 
             // Instantiate all atoms and save them in a dict
-            atoms = {}
-            atom_ids = compound.atoms.aid;
-            atom_elements = compound.atoms.element;
-            atom_coords_x = compound.coords[0].conformers[0].x;
-            atom_coords_y = compound.coords[0].conformers[0].y;
+            var atoms = {}
+            var atom_ids = compound.atoms.aid;
+            var atom_elements = compound.atoms.element;
+            var atom_coords_x = compound.coords[0].conformers[0].x;
+            var atom_coords_y = compound.coords[0].conformers[0].y;
             for (var i = 0; i < atom_ids.length; i++) {
                 atom = {
                     'element': atom_elements[i],
@@ -42,6 +43,14 @@ var Chem = {
             };
 
             // Create covalent (spring) bonds between atoms
+            var atom_bond_1_ids = compound.bonds.aid1
+            var atom_bond_2_ids = compound.bonds.aid2
+            var atom_bond_orders = compound.bonds.order
+            for (var i = 0; i < atom_bond_1_ids.length; i++) {
+                var id1 = atom_bond_1_ids[i];
+                var id2 = atom_bond_2_ids[i];
+                bond_atoms(atoms[id1], atoms[id2]);
+            }
 
             // Return the collection of atoms
             return atoms;
